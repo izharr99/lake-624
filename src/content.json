@@ -1,0 +1,245 @@
+{
+  "brand": {
+    "name": "Solvei",
+    "fullName": "Solvei Lake Lodge",
+    "tagline": "A lodge that keeps time with the lake.",
+    "description": "Solvei Lake Lodge is a fictional twelve-room retreat on the quiet shore of Lake Solvei in the Valmora Highlands. Scroll through a full day, step inside, and request your stay.",
+    "location": "Lake Solvei, Valmora Highlands",
+    "coordinates": "46.41° N, 9.83° E",
+    "established": "Est. 1931"
+  },
+  "contact": {
+    "whatsapp": "15550100200",
+    "email": "stay@solvei-lodge.example",
+    "phoneDisplay": "+1 555 010 0200",
+    "address": "1 Shore Road, Lake Solvei, Valmora Highlands"
+  },
+  "theme": {
+    "paper": "#f3ede3",
+    "paperDeep": "#e8dfd0",
+    "ink": "#151821",
+    "muted": "#5f6470",
+    "accent": "#c8693a",
+    "accentInk": "#fff8f0",
+    "night": "#0b1024"
+  },
+  "nav": [
+    { "label": "Rooms", "href": "#rooms" },
+    { "label": "A day here", "href": "#day" },
+    { "label": "Guests", "href": "#reviews" },
+    { "label": "Book", "href": "#book" }
+  ],
+  "hero": {
+    "kicker": "Lake Solvei, Valmora Highlands",
+    "title": "Solvei",
+    "lede": "A lodge that keeps time with the lake.",
+    "scrollHint": "Scroll to pass the day",
+    "phases": [
+      {
+        "at": 0,
+        "time": "05:40",
+        "label": "First light",
+        "skyTop": "#2a2c5e",
+        "skyMid": "#c26a8c",
+        "skyHorizon": "#f7b48c",
+        "far": "#7a6890",
+        "mid": "#524773",
+        "near": "#2b2848",
+        "water": "#94749c",
+        "text": "#fff4ea",
+        "windows": 0.25,
+        "stars": 0.35
+      },
+      {
+        "at": 0.25,
+        "time": "09:15",
+        "label": "Morning swim",
+        "skyTop": "#5aa4d8",
+        "skyMid": "#a6d3ec",
+        "skyHorizon": "#eef6f1",
+        "far": "#93b6c6",
+        "mid": "#5d8c88",
+        "near": "#2c5a4e",
+        "water": "#6ea4ba",
+        "text": "#0f2d2a",
+        "windows": 0,
+        "stars": 0
+      },
+      {
+        "at": 0.5,
+        "time": "18:30",
+        "label": "Golden hour",
+        "skyTop": "#4d7cb2",
+        "skyMid": "#f0ae68",
+        "skyHorizon": "#ffd897",
+        "far": "#b38a76",
+        "mid": "#7b5f50",
+        "near": "#3c3629",
+        "water": "#d39864",
+        "text": "#2a1608",
+        "windows": 0.35,
+        "stars": 0
+      },
+      {
+        "at": 0.75,
+        "time": "20:45",
+        "label": "Blue hour",
+        "skyTop": "#1b1d4a",
+        "skyMid": "#6a3e7a",
+        "skyHorizon": "#df706a",
+        "far": "#4b3e64",
+        "mid": "#33294b",
+        "near": "#1b1730",
+        "water": "#5b3e66",
+        "text": "#ffe9dc",
+        "windows": 0.85,
+        "stars": 0.45
+      },
+      {
+        "at": 1,
+        "time": "23:10",
+        "label": "Lights low",
+        "skyTop": "#04071a",
+        "skyMid": "#0d1738",
+        "skyHorizon": "#1f2d57",
+        "far": "#1b2442",
+        "mid": "#131a31",
+        "near": "#090e1d",
+        "water": "#0e1731",
+        "text": "#f5ecd8",
+        "windows": 1,
+        "stars": 1
+      }
+    ]
+  },
+  "arrival": {
+    "kicker": "Then the lights come on",
+    "title": "Step inside.",
+    "body": "Twelve rooms of larch, linen and lake light. No televisions, a wood stove in every one, and the water close enough to hear."
+  },
+  "rooms": {
+    "kicker": "Rooms",
+    "title": "Pick your window.",
+    "hint": "Scroll sideways, tap a room to open it",
+    "currency": "EUR",
+    "currencySymbol": "€",
+    "perNight": "per night",
+    "items": [
+      {
+        "id": "lakeside-cabin",
+        "name": "Lakeside Cabin",
+        "short": "A low timber cabin with its door ten steps from the water.",
+        "description": "Our smallest room and the one guests book again. A queen bed faces a full-height window, there is a reading nook built into the wall, and the porch steps lead straight onto the shingle.",
+        "price": 240,
+        "size": "28 m²",
+        "sleeps": 2,
+        "bed": "Queen bed",
+        "view": "Lake",
+        "palette": { "wall": "#e9dcc6", "floor": "#a8794f", "wood": "#7a5236", "fabric": "#5d7a8c", "accent": "#d9824b" },
+        "amenities": ["Wood stove", "Private porch", "Rain shower", "Linen robes", "Coffee press and local beans", "Reading nook"],
+        "images": []
+      },
+      {
+        "id": "pine-loft",
+        "name": "Pine Loft",
+        "short": "A ladder up to a sleeping loft under the pines.",
+        "description": "Tucked into the tree line above the lodge. Sleep in the loft under a skylight, spend the evening in the low sofa by the stove, and wake to woodpeckers rather than alarms.",
+        "price": 290,
+        "size": "34 m²",
+        "sleeps": 3,
+        "bed": "Queen loft and daybed",
+        "view": "Forest",
+        "palette": { "wall": "#dfe3d3", "floor": "#9a7350", "wood": "#5f4a33", "fabric": "#4f6b4a", "accent": "#c79a3e" },
+        "amenities": ["Skylight over the bed", "Wood stove", "Daybed for a third guest", "Walk-in shower", "Forest terrace", "Board games"],
+        "images": []
+      },
+      {
+        "id": "alpenglow-suite",
+        "name": "Alpenglow Suite",
+        "short": "A corner suite where the bath faces the sunset.",
+        "description": "Two walls of glass on the top floor of the main lodge. A freestanding copper bath sits where the evening light lands, and the bed is angled toward the peaks for the first pink of morning.",
+        "price": 410,
+        "size": "52 m²",
+        "sleeps": 2,
+        "bed": "King bed",
+        "view": "Lake and peaks",
+        "palette": { "wall": "#f1e1d6", "floor": "#b0805c", "wood": "#7d4f3a", "fabric": "#a35a4a", "accent": "#e09a5f" },
+        "amenities": ["Copper soaking bath", "Corner glass walls", "Wood stove", "Private balcony", "Turndown with herbal tea", "Record player"],
+        "images": []
+      },
+      {
+        "id": "boathouse-studio",
+        "name": "Boathouse Studio",
+        "short": "Built over the water on the old boathouse piles.",
+        "description": "The floor has a glass panel so you can watch the lake underneath. A canoe is tied up below for you alone, and the deck is wide enough for a long breakfast.",
+        "price": 330,
+        "size": "40 m²",
+        "sleeps": 2,
+        "bed": "King bed",
+        "view": "Over the water",
+        "palette": { "wall": "#dbe4e6", "floor": "#8d6d55", "wood": "#4e4a4f", "fabric": "#355d78", "accent": "#5fa1b8" },
+        "amenities": ["Private canoe", "Glass floor panel", "Waterside deck", "Rain shower", "Breakfast basket", "Swim ladder"],
+        "images": []
+      },
+      {
+        "id": "summit-chalet",
+        "name": "Summit Chalet",
+        "short": "Two bedrooms, a long table and a stove for everyone.",
+        "description": "Our family chalet sits on its own above the meadow. Two bedrooms, a bunk nook the children fight over, and a kitchen with a table long enough for everyone after a day outside.",
+        "price": 520,
+        "size": "78 m²",
+        "sleeps": 5,
+        "bed": "King, twin and bunk nook",
+        "view": "Meadow and lake",
+        "palette": { "wall": "#ece4d2", "floor": "#a47a52", "wood": "#6a4b2f", "fabric": "#7a6a9a", "accent": "#d4a14a" },
+        "amenities": ["Two bedrooms", "Full kitchen", "Bunk nook", "Outdoor hot tub", "Sledges in winter", "Washer and dryer"],
+        "images": []
+      }
+    ]
+  },
+  "day": {
+    "kicker": "A day here",
+    "title": "One day, drawn on the water.",
+    "body": "Everything below is included with your stay. Book a guide at the front desk the night before.",
+    "stops": [
+      { "at": 0.04, "time": "06:00", "title": "Dawn paddle", "text": "Canoes leave the jetty while the mist is still on the water. Heron Point and back in an hour." },
+      { "at": 0.24, "time": "08:30", "title": "Breakfast on the jetty", "text": "Rye bread from the wood oven, lake trout, and honey from the hives behind the lodge." },
+      { "at": 0.46, "time": "11:00", "title": "Larch Steps ridge walk", "text": "A guided three-hour loop with the whole lake below you and lunch packed in your bag." },
+      { "at": 0.68, "time": "16:00", "title": "Cedar sauna and cold plunge", "text": "Heat in the floating sauna, then down the ladder into the lake. Repeat until it feels right." },
+      { "at": 0.86, "time": "19:30", "title": "Supper at the Boathouse", "text": "Six courses from the valley, served at one long table as the sun leaves the peaks." },
+      { "at": 0.99, "time": "22:30", "title": "Stargazing raft", "text": "Blankets, cocoa and a telescope on a raft moored in the middle of the lake." }
+    ]
+  },
+  "reviews": {
+    "kicker": "Guests",
+    "featured": {
+      "quote": "We came for two nights and stayed six. The lake changes colour every hour and somehow the room changes with it.",
+      "name": "Mara and Tomas",
+      "detail": "Alpenglow Suite, September"
+    },
+    "items": [
+      { "quote": "The canoe under the boathouse was the best thing that has ever been included in a room rate.", "name": "Priya S.", "detail": "Boathouse Studio" },
+      { "quote": "Quiet in the way only real quiet is. Our kids still talk about the stargazing raft.", "name": "The Okafor family", "detail": "Summit Chalet" },
+      { "quote": "I booked by WhatsApp in the evening and had a handwritten note waiting on the bed.", "name": "Jonas W.", "detail": "Lakeside Cabin" }
+    ],
+    "rating": "4.9 from 812 stays"
+  },
+  "booking": {
+    "kicker": "Book",
+    "title": "Request your stay.",
+    "body": "Pick your dates and room and we will confirm availability within a few hours. No payment is taken online.",
+    "cleaningFee": 45,
+    "taxRate": 0.08,
+    "taxLabel": "Local taxes",
+    "cleaningLabel": "Cleaning fee",
+    "minNights": 1,
+    "maxNights": 28,
+    "whatsappLabel": "Request on WhatsApp",
+    "emailLabel": "Request by email",
+    "note": "This is a template demo. Requests open WhatsApp or your email app with the details filled in."
+  },
+  "footer": {
+    "line": "Twelve rooms, one lake, no hurry.",
+    "credit": "Scrollcraft Travel, a free MIT template. Solvei is fictional."
+  }
+}
