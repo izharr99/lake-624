@@ -4,7 +4,7 @@ A free, static, scroll-driven website template for a hotel or travel resort. Scr
 
 The demo brand, **Solvei Lake Lodge**, is fictional. Everything about it lives in one file, `src/content.json`, so you can rebrand the whole site without touching any logic.
 
-**Live demo:** LIVE_URL
+**Live demo:** https://scrollcraft-travel.vercel.app
 
 ![Solvei hero at blue hour](public/og.png)
 
