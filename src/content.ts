@@ -120,6 +120,16 @@ export interface Content {
     image: Picture
   }
   footer: { line: string; colophon: string; credit: string; image: Picture }
+  credits: {
+    label: string
+    author: string
+    url: string
+    repo: string
+    repoLabel: string
+    license: string
+    mediaLabel: string
+    mediaUrl: string
+  }
 }
 
 export const content: Content = raw

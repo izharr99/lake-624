@@ -42,11 +42,21 @@ export function initHero(reduced: boolean): void {
   let seq = new FrameSequence(canvas, usePortrait ? hero.sequence.mobile : hero.sequence.desktop)
   const footage = { p: 0 }
   const draw = (): void => {
-    seq.draw(footage.p)
+    seq.seek(footage.p)
     const c = sampleClock(hero.phases, footage.p)
     setClock(c.time, c.label, footage.p)
   }
   seq.resize()
+  // The visible playhead eases towards the scroll target on the shared GSAP ticker
+  // (the same clock that drives Lenis), only while the hero is pinned.
+  const onTick = (): void => seq.tick()
+  let ticking = false
+  const setTicking = (on: boolean): void => {
+    if (on === ticking) return
+    ticking = on
+    if (on) gsap.ticker.add(onTick)
+    else gsap.ticker.remove(onTick)
+  }
   // The poster <img> covers the first paint; start streaming frames once the page is idle.
   const begin = (): void => {
     seq.load(() => stage.classList.add('is-seq-ready'))
@@ -64,17 +74,20 @@ export function initHero(reduced: boolean): void {
       start: 'top top',
       end: () => `+=${window.innerHeight * 9}`,
       pin: stage,
-      scrub: 1.6,
+      scrub: 0.6,
       invalidateOnRefresh: true,
+      onToggle: (self) => setTicking(self.isActive),
       onRefresh: () => {
         // Swap to the other sequence if the device rotated across the threshold.
         if (portrait() !== usePortrait) {
           usePortrait = portrait()
+          seq.dispose()
           seq = new FrameSequence(canvas, usePortrait ? hero.sequence.mobile : hero.sequence.desktop)
           seq.load()
         }
         seq.resize()
         draw()
+        seq.seek(footage.p, true)
       },
       // Once the camera is inside the warm room, the nav switches to dark ink.
       onUpdate: (self) => document.documentElement.classList.toggle('nav-dark', self.progress > 0.9),
@@ -96,7 +109,7 @@ export function initHero(reduced: boolean): void {
     .fromTo('[data-exterior] img', { scale: 1.06 }, { scale: 1, duration: 0.1, ease: 'sine.out' }, FOOTAGE_END + 0.02)
     .to('[data-clock]', { autoAlpha: 0, duration: 0.04, ease: 'sine.inOut' }, FOOTAGE_END + 0.12)
     // Camera push towards the lit windows.
-    .to('[data-exterior] img', { scale: 7, transformOrigin: origin, duration: 0.2, ease: 'power2.in' }, FOOTAGE_END + 0.12)
+    .to('[data-exterior] img', { scale: 4, transformOrigin: origin, duration: 0.2, ease: 'power2.in' }, FOOTAGE_END + 0.12)
     .to('[data-exterior]', { autoAlpha: 0, duration: 0.05, ease: 'sine.in' }, FOOTAGE_END + 0.27)
     .fromTo(
       '[data-interior]',

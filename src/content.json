@@ -97,7 +97,7 @@
     "sequence": {
       "desktop": {
         "path": "/seq/d/",
-        "count": 150,
+        "count": 240,
         "digits": 3,
         "ext": "webp",
         "width": 1280,
@@ -105,7 +105,7 @@
       },
       "mobile": {
         "path": "/seq/m/",
-        "count": 100,
+        "count": 160,
         "digits": 3,
         "ext": "webp",
         "width": 540,
@@ -396,11 +396,21 @@
   "footer": {
     "line": "Twelve rooms, one lake, no hurry.",
     "colophon": "Set in Cormorant Garamond and Inter. Photographs from Pexels, credited in the README.",
-    "credit": "Scrollcraft Travel, a free MIT template. Solvei is fictional.",
+    "credit": "Scrollcraft Travel is a template. Solvei is fictional.",
     "image": {
       "src": "/img/footer-night.webp",
       "alt": "The Milky Way above a mountain lake at night",
       "caption": "Fig. 5. The view from the stargazing raft."
     }
+  },
+  "credits": {
+    "label": "Designed & built by",
+    "author": "Muhammad Izhar",
+    "url": "https://izhar.dev",
+    "repo": "https://github.com/izharr99/scrollcraft-travel",
+    "repoLabel": "Get this template",
+    "license": "Free under the MIT license.",
+    "mediaLabel": "Photo and footage credits",
+    "mediaUrl": "https://github.com/izharr99/scrollcraft-travel#credits"
   }
 }

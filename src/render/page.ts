@@ -1,7 +1,7 @@
 import { content, money } from '../content'
 import { roomMedia } from './roomArt'
 
-const { brand, hero, arrival, rooms, day, reviews, booking, footer, nav, contact } = content
+const { brand, hero, arrival, rooms, day, reviews, booking, footer, nav, contact, credits } = content
 
 export const esc = (s: string): string =>
   s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string)
@@ -247,7 +247,17 @@ function footerHTML(): string {
       <p><span class="label">Write</span><a href="mailto:${contact.email}">${esc(contact.email)}</a><br>${esc(contact.phoneDisplay)}</p>
       <p><span class="label">Colophon</span>${esc(footer.colophon)}</p>
     </div>
-    <p class="caption footer__credit">${esc(brand.issueTitle)} · ${esc(brand.issue)} · ${esc(brand.established)}. ${esc(footer.credit)}</p>
+    <div class="footer__credits">
+      <p class="footer__byline">
+        <span class="label">${esc(credits.label)}</span>
+        <a href="${credits.url}" target="_blank" rel="noopener">${esc(credits.author)}</a>
+      </p>
+      <ul class="footer__links">
+        <li><a class="label" href="${credits.repo}" target="_blank" rel="noopener">${esc(credits.repoLabel)}</a></li>
+        <li><a class="label" href="${credits.mediaUrl}" target="_blank" rel="noopener">${esc(credits.mediaLabel)}</a></li>
+      </ul>
+    </div>
+    <p class="caption footer__credit">${esc(brand.issueTitle)} · ${esc(brand.issue)} · ${esc(brand.established)}. ${esc(footer.credit)} ${esc(credits.license)}</p>
   </div>
 </footer>`
 }

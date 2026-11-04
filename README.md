@@ -10,7 +10,8 @@ The demo brand, **Solvei Lake Lodge**, is fictional. Everything about it lives i
 
 ## Features
 
-- **Real sunrise to sunset hero.** Two Pexels time-lapses (a sunrise over a mountain range and a sunset behind the hills of a lake) are stitched with a crossfade and cut into WebP frame sequences: 150 landscape frames for desktop (4.8 MB) and 100 portrait frames cropped around the sun for phones (2.1 MB). A canvas scrubs them with scroll, the clock reads the time of day from keyframes in `content.json`, and a blue-hour grade closes the day.
+- **Real sunrise to sunset hero.** Two Pexels time-lapses (a sunrise over a mountain range and a sunset behind the hills of a lake) are stitched with a crossfade and cut into WebP frame sequences: 240 landscape frames for desktop (7.2 MB) and 160 portrait frames cropped around the sun for phones (3.3 MB), with the colour grade baked in at export. A canvas scrubs them with scroll, the clock reads the time of day from keyframes in `content.json`, and a blue-hour grade closes the day.
+- **Smooth scrubbing.** `src/lib/sequence.ts` decodes a sliding window of frames around the playhead into `ImageBitmap`s off the main thread, so a draw never waits on a decode. The playhead is fractional and eased on the shared GSAP ticker, and neighbouring frames are cross-blended by the fraction, so the picture changes on every display frame instead of stepping. The canvas is sized only on resize and capped to the detail the footage actually has. Measured in headless Chrome while scrolling the hero, the picture updated 19 times a second before this (12.6 with 4x CPU throttling) and 59 times a second after.
 - **Progressive frame loading.** The first frame ships as an `<img>` poster, then frames stream in coarse to fine (every 16th, 8th, 4th, 2nd, then all) after the page is idle, so the full scroll range works early on slow connections.
 - **Fly-through.** A slow crossfade to the lit lodge at dusk, then a camera push towards its windows (focus point set in `content.json`) and a crossfade into the room.
 - **Rooms as magazine plates** on a pinned horizontal rail, staggered like a layout, with gentle inner parallax.
@@ -55,7 +56,7 @@ Deploy `dist/` to any static host. On Vercel, the default Vite preset works with
 Any time-lapse works. To cut a sequence with ffmpeg and cwebp:
 
 ```bash
-ffmpeg -i timelapse.mp4 -vf "fps=150/DURATION,scale=1280:720" frames/%03d.png
+ffmpeg -i timelapse.mp4 -vf "fps=240/DURATION,scale=1280:720" frames/%03d.png
 for f in frames/*.png; do cwebp -q 62 "$f" -o "public/seq/d/$(basename "${f%.png}").webp"; done
 # portrait set for phones: crop a 9:16 window around the sun, then scale to 540x960
 ```
@@ -98,6 +99,10 @@ All footage and photographs come from [Pexels](https://www.pexels.com) under the
 - Supper table: [4989546](https://www.pexels.com/photo/4989546/). Night sky: [18780512](https://www.pexels.com/photo/18780512/)
 
 Fonts: [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) and [Inter](https://rsms.me/inter/) (SIL Open Font License) via [Fontsource](https://fontsource.org). Motion: [GSAP](https://gsap.com) (free standard license) and [Lenis](https://lenis.darkroom.engineering) (MIT).
+
+## Author
+
+Designed and built by [Muhammad Izhar](https://izhar.dev). Change `credits` in `content.json` to put your own name in the footer.
 
 ## License
 
