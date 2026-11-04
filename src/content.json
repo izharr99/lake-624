@@ -1,10 +1,10 @@
 {
   "brand": {
-    "name": "Solvei",
-    "fullName": "Solvei Lake Lodge",
+    "name": "Lake 624",
+    "fullName": "Lake 624",
     "tagline": "A lodge that keeps time with the lake.",
-    "description": "Solvei Lake Lodge is a fictional twelve-room retreat on the quiet shore of Lake Solvei in the Valmora Highlands. Scroll through a full day, step inside, and request your stay.",
-    "location": "Lake Solvei, Valmora Highlands",
+    "description": "Lake 624 is a fictional twelve-room lodge on the quiet shore of a mountain lake in the Valmora Highlands. Scroll through a full day, step inside, and request your stay.",
+    "location": "Valmora Highlands",
     "coordinates": "46.41° N, 9.83° E",
     "established": "Est. 1931",
     "issue": "No. 07",
@@ -13,9 +13,9 @@
   },
   "contact": {
     "whatsapp": "15550100200",
-    "email": "stay@solvei-lodge.example",
+    "email": "stay@lake624.example",
     "phoneDisplay": "+1 555 010 0200",
-    "address": "1 Shore Road, Lake Solvei, Valmora Highlands"
+    "address": "1 Shore Road, Valmora Highlands"
   },
   "theme": {
     "paper": "#f1ebe0",
@@ -47,7 +47,7 @@
   ],
   "hero": {
     "kicker": "The Lake Issue · No. 07",
-    "title": "Solvei",
+    "title": "Lake 624",
     "lede": "A lodge that keeps time with the lake.",
     "caption": "Fig. 1. The lake at",
     "scrollHint": "Scroll to pass the day",
@@ -345,7 +345,8 @@
         "text": "Blankets, cocoa and a telescope on a raft moored in the middle of the lake.",
         "image": "/img/day-stars.webp"
       }
-    ]
+    ],
+    "mapLabel": "Lake 624"
   },
   "reviews": {
     "kicker": "Chapter IV · Guests",
@@ -396,7 +397,7 @@
   "footer": {
     "line": "Twelve rooms, one lake, no hurry.",
     "colophon": "Set in Cormorant Garamond and Inter. Photographs from Pexels, credited in the README.",
-    "credit": "Scrollcraft Travel is a template. Solvei is fictional.",
+    "credit": "Lake 624 is a fictional lodge, made to be rebranded.",
     "image": {
       "src": "/img/footer-night.webp",
       "alt": "The Milky Way above a mountain lake at night",
@@ -407,10 +408,10 @@
     "label": "Designed & built by",
     "author": "Muhammad Izhar",
     "url": "https://izhar.dev",
-    "repo": "https://github.com/izharr99/scrollcraft-travel",
+    "repo": "https://github.com/izharr99/lake-624",
     "repoLabel": "Get this template",
     "license": "Free under the MIT license.",
     "mediaLabel": "Photo and footage credits",
-    "mediaUrl": "https://github.com/izharr99/scrollcraft-travel#credits"
+    "mediaUrl": "https://github.com/izharr99/lake-624#credits"
   }
 }

@@ -138,7 +138,7 @@ function dayHTML(): string {
           <path class="map__route-bg" d="${ROUTE}"/>
           <path class="map__route" d="${ROUTE}" data-route/>
           <g data-markers></g>
-          <text class="map__label" x="500" y="360">Lake Solvei</text>
+          <text class="map__label" x="500" y="360">${esc(day.mapLabel)}</text>
           <g class="map__compass" transform="translate(930 620)"><path d="M0 -34L7 0L0 34L-7 0Z"/><text y="-42">N</text></g>
         </svg>
         <figcaption class="caption">Fig. 2. The route, drawn as the day goes by.</figcaption>

@@ -1,12 +1,12 @@
-# Scrollcraft Travel
+# Lake 624: Hotel & Travel Template
 
 A free, static, scroll-driven website template for a hotel or travel resort, art-directed as a printed travel magazine: quiet luxury, paper and ink, Cormorant Garamond italics, folios, captions and drop caps. Scroll works as a playhead. A real time-lapse carries the hero from first light through sunrise, afternoon and sunset into blue hour. The camera then finds the lodge with its lights on, pushes in through the windows and lands in a room. Rooms turn past as magazine plates and open into a full spread, a route draws itself around the lake, and the issue closes with a concierge card that sends a prefilled reservation request over WhatsApp or email.
 
-The demo brand, **Solvei Lake Lodge**, is fictional. Everything about it lives in one file, `src/content.json`, so you can rebrand the whole site without touching any logic.
+The demo brand, **Lake 624**, is a fictional lodge. Everything about it lives in one file, `src/content.json`, so you can rebrand the whole site without touching any logic.
 
-**Live demo:** https://scrollcraft-travel.vercel.app
+**Live demo:** https://lake624.izhar.dev
 
-![Solvei hero at sunrise](public/og.jpg)
+![Lake 624 hero at sunrise](public/og.jpg)
 
 ## Features
 
@@ -106,4 +106,4 @@ Designed and built by [Muhammad Izhar](https://izhar.dev). Change `credits` in `
 
 ## License
 
-The code is MIT; see [LICENSE](LICENSE). Photographs and footage stay under the Pexels License. Solvei Lake Lodge, its rooms, reviews and contact details are fictional.
+The code is MIT; see [LICENSE](LICENSE). Photographs and footage stay under the Pexels License. Lake 624, its rooms, reviews and contact details are fictional.

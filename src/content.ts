@@ -101,7 +101,7 @@ export interface Content {
     perNight: string
     items: Room[]
   }
-  day: { kicker: string; title: string; body: string; stops: Stop[] }
+  day: { kicker: string; title: string; body: string; mapLabel: string; stops: Stop[] }
   reviews: { kicker: string; featured: Review; items: Review[]; rating: string }
   booking: {
     kicker: string
