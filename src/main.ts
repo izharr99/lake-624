@@ -1,10 +1,14 @@
-import '@fontsource-variable/fraunces'
-import '@fontsource-variable/fraunces/wght-italic.css'
+import '@fontsource/cormorant-garamond/300.css'
+import '@fontsource/cormorant-garamond/300-italic.css'
+import '@fontsource/cormorant-garamond/400.css'
+import '@fontsource/cormorant-garamond/400-italic.css'
+import '@fontsource/cormorant-garamond/500.css'
 import '@fontsource-variable/inter'
 import './styles.css'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Flip } from 'gsap/Flip'
+import { SplitText } from 'gsap/SplitText'
 import { content } from './content'
 import { renderPage } from './render/page'
 import { initBooking } from './booking'
@@ -16,7 +20,7 @@ import { initDay } from './motion/day'
 import { initReveals } from './motion/reveals'
 import { initNavInk } from './motion/nav'
 
-gsap.registerPlugin(ScrollTrigger, Flip)
+gsap.registerPlugin(ScrollTrigger, Flip, SplitText)
 
 // Theme colours come from content.json: theme.paperDeep -> --paper-deep
 const rootStyle = document.documentElement.style

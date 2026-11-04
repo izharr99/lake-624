@@ -6,7 +6,10 @@
     "description": "Solvei Lake Lodge is a fictional twelve-room retreat on the quiet shore of Lake Solvei in the Valmora Highlands. Scroll through a full day, step inside, and request your stay.",
     "location": "Lake Solvei, Valmora Highlands",
     "coordinates": "46.41° N, 9.83° E",
-    "established": "Est. 1931"
+    "established": "Est. 1931",
+    "issue": "No. 07",
+    "issueTitle": "The Lake Issue",
+    "season": "Winter 2026"
   },
   "contact": {
     "whatsapp": "15550100200",
@@ -15,115 +18,127 @@
     "address": "1 Shore Road, Lake Solvei, Valmora Highlands"
   },
   "theme": {
-    "paper": "#f3ede3",
-    "paperDeep": "#e8dfd0",
-    "ink": "#151821",
-    "muted": "#5f6470",
-    "accent": "#c8693a",
-    "accentInk": "#fff8f0",
-    "night": "#0b1024"
+    "paper": "#f1ebe0",
+    "paperDeep": "#e7dfd1",
+    "ink": "#1b1814",
+    "muted": "#6d665c",
+    "accent": "#9a5b3f",
+    "accentInk": "#f8f3ea",
+    "sage": "#7b8470",
+    "night": "#14121a"
   },
   "nav": [
-    { "label": "Rooms", "href": "#rooms" },
-    { "label": "A day here", "href": "#day" },
-    { "label": "Guests", "href": "#reviews" },
-    { "label": "Book", "href": "#book" }
+    {
+      "label": "Rooms",
+      "href": "#rooms"
+    },
+    {
+      "label": "A day here",
+      "href": "#day"
+    },
+    {
+      "label": "Guests",
+      "href": "#reviews"
+    },
+    {
+      "label": "Reserve",
+      "href": "#book"
+    }
   ],
   "hero": {
-    "kicker": "Lake Solvei, Valmora Highlands",
+    "kicker": "The Lake Issue · No. 07",
     "title": "Solvei",
     "lede": "A lodge that keeps time with the lake.",
+    "caption": "Fig. 1. The lake at",
     "scrollHint": "Scroll to pass the day",
     "phases": [
       {
         "at": 0,
-        "time": "05:40",
-        "label": "First light",
-        "skyTop": "#2a2c5e",
-        "skyMid": "#c26a8c",
-        "skyHorizon": "#f7b48c",
-        "far": "#7a6890",
-        "mid": "#524773",
-        "near": "#2b2848",
-        "water": "#94749c",
-        "text": "#fff4ea",
-        "windows": 0.25,
-        "stars": 0.35
+        "time": "05:30",
+        "label": "First light"
       },
       {
-        "at": 0.25,
-        "time": "09:15",
-        "label": "Morning swim",
-        "skyTop": "#5aa4d8",
-        "skyMid": "#a6d3ec",
-        "skyHorizon": "#eef6f1",
-        "far": "#93b6c6",
-        "mid": "#5d8c88",
-        "near": "#2c5a4e",
-        "water": "#6ea4ba",
-        "text": "#0f2d2a",
-        "windows": 0,
-        "stars": 0
+        "at": 0.28,
+        "time": "06:14",
+        "label": "Sunrise"
+      },
+      {
+        "at": 0.42,
+        "time": "07:40",
+        "label": "Morning"
       },
       {
         "at": 0.5,
-        "time": "18:30",
-        "label": "Golden hour",
-        "skyTop": "#4d7cb2",
-        "skyMid": "#f0ae68",
-        "skyHorizon": "#ffd897",
-        "far": "#b38a76",
-        "mid": "#7b5f50",
-        "near": "#3c3629",
-        "water": "#d39864",
-        "text": "#2a1608",
-        "windows": 0.35,
-        "stars": 0
+        "time": "14:00",
+        "label": "Afternoon"
       },
       {
-        "at": 0.75,
-        "time": "20:45",
-        "label": "Blue hour",
-        "skyTop": "#1b1d4a",
-        "skyMid": "#6a3e7a",
-        "skyHorizon": "#df706a",
-        "far": "#4b3e64",
-        "mid": "#33294b",
-        "near": "#1b1730",
-        "water": "#5b3e66",
-        "text": "#ffe9dc",
-        "windows": 0.85,
-        "stars": 0.45
+        "at": 0.7,
+        "time": "18:20",
+        "label": "Golden hour"
+      },
+      {
+        "at": 0.82,
+        "time": "18:58",
+        "label": "Sunset"
+      },
+      {
+        "at": 0.92,
+        "time": "19:20",
+        "label": "Afterglow"
       },
       {
         "at": 1,
-        "time": "23:10",
-        "label": "Lights low",
-        "skyTop": "#04071a",
-        "skyMid": "#0d1738",
-        "skyHorizon": "#1f2d57",
-        "far": "#1b2442",
-        "mid": "#131a31",
-        "near": "#090e1d",
-        "water": "#0e1731",
-        "text": "#f5ecd8",
-        "windows": 1,
-        "stars": 1
+        "time": "20:05",
+        "label": "Blue hour"
       }
-    ]
+    ],
+    "alt": "Time-lapse of the sun rising over a mountain range and setting behind the hills of a lake, as you scroll.",
+    "sequence": {
+      "desktop": {
+        "path": "/seq/d/",
+        "count": 150,
+        "digits": 3,
+        "ext": "webp",
+        "width": 1280,
+        "height": 720
+      },
+      "mobile": {
+        "path": "/seq/m/",
+        "count": 100,
+        "digits": 3,
+        "ext": "webp",
+        "width": 540,
+        "height": 960
+      }
+    },
+    "exterior": {
+      "src": "/img/lodge-dusk.webp",
+      "alt": "A lodge with lit windows on the shore of a dark lake at dusk, its lights reflected in the water",
+      "focus": [
+        0.71,
+        0.31
+      ],
+      "time": "21:40",
+      "label": "Lights on"
+    },
+    "interior": {
+      "src": "/img/interior-aframe.webp",
+      "alt": "Inside a timber A-frame room, two armchairs face a tall triangular window onto the hills"
+    }
   },
   "arrival": {
-    "kicker": "Then the lights come on",
+    "kicker": "Chapter I · Arrival",
     "title": "Step inside.",
-    "body": "Twelve rooms of larch, linen and lake light. No televisions, a wood stove in every one, and the water close enough to hear."
+    "body": "Twelve rooms of larch, linen and lake light. There are no televisions, there is a wood stove in every one, and the water is close enough to hear from the pillow."
   },
   "rooms": {
-    "kicker": "Rooms",
+    "kicker": "Chapter II · Rooms",
     "title": "Pick your window.",
-    "hint": "Scroll sideways, tap a room to open it",
+    "hint": "Scroll to turn the pages",
     "currency": "EUR",
     "currencySymbol": "€",
-    "perNight": "per night",
+    "perNight": "the night",
     "items": [
       {
         "id": "lakeside-cabin",
@@ -135,9 +150,26 @@
         "sleeps": 2,
         "bed": "Queen bed",
         "view": "Lake",
-        "palette": { "wall": "#e9dcc6", "floor": "#a8794f", "wood": "#7a5236", "fabric": "#5d7a8c", "accent": "#d9824b" },
-        "amenities": ["Wood stove", "Private porch", "Rain shower", "Linen robes", "Coffee press and local beans", "Reading nook"],
-        "images": []
+        "palette": {
+          "wall": "#e9dcc6",
+          "floor": "#a8794f",
+          "wood": "#7a5236",
+          "fabric": "#5d7a8c",
+          "accent": "#d9824b"
+        },
+        "amenities": [
+          "Wood stove",
+          "Private porch",
+          "Rain shower",
+          "Linen robes",
+          "Coffee press and local beans",
+          "Reading nook"
+        ],
+        "images": [
+          "/img/room-cabin-1.webp",
+          "/img/room-cabin-2.webp",
+          "/img/room-cabin-3.webp"
+        ]
       },
       {
         "id": "pine-loft",
@@ -149,9 +181,26 @@
         "sleeps": 3,
         "bed": "Queen loft and daybed",
         "view": "Forest",
-        "palette": { "wall": "#dfe3d3", "floor": "#9a7350", "wood": "#5f4a33", "fabric": "#4f6b4a", "accent": "#c79a3e" },
-        "amenities": ["Skylight over the bed", "Wood stove", "Daybed for a third guest", "Walk-in shower", "Forest terrace", "Board games"],
-        "images": []
+        "palette": {
+          "wall": "#dfe3d3",
+          "floor": "#9a7350",
+          "wood": "#5f4a33",
+          "fabric": "#4f6b4a",
+          "accent": "#c79a3e"
+        },
+        "amenities": [
+          "Skylight over the bed",
+          "Wood stove",
+          "Daybed for a third guest",
+          "Walk-in shower",
+          "Forest terrace",
+          "Board games"
+        ],
+        "images": [
+          "/img/room-loft-1.webp",
+          "/img/room-loft-2.webp",
+          "/img/room-loft-3.webp"
+        ]
       },
       {
         "id": "alpenglow-suite",
@@ -163,9 +212,26 @@
         "sleeps": 2,
         "bed": "King bed",
         "view": "Lake and peaks",
-        "palette": { "wall": "#f1e1d6", "floor": "#b0805c", "wood": "#7d4f3a", "fabric": "#a35a4a", "accent": "#e09a5f" },
-        "amenities": ["Copper soaking bath", "Corner glass walls", "Wood stove", "Private balcony", "Turndown with herbal tea", "Record player"],
-        "images": []
+        "palette": {
+          "wall": "#f1e1d6",
+          "floor": "#b0805c",
+          "wood": "#7d4f3a",
+          "fabric": "#a35a4a",
+          "accent": "#e09a5f"
+        },
+        "amenities": [
+          "Copper soaking bath",
+          "Corner glass walls",
+          "Wood stove",
+          "Private balcony",
+          "Turndown with herbal tea",
+          "Record player"
+        ],
+        "images": [
+          "/img/room-suite-1.webp",
+          "/img/room-suite-2.webp",
+          "/img/room-suite-3.webp"
+        ]
       },
       {
         "id": "boathouse-studio",
@@ -177,9 +243,26 @@
         "sleeps": 2,
         "bed": "King bed",
         "view": "Over the water",
-        "palette": { "wall": "#dbe4e6", "floor": "#8d6d55", "wood": "#4e4a4f", "fabric": "#355d78", "accent": "#5fa1b8" },
-        "amenities": ["Private canoe", "Glass floor panel", "Waterside deck", "Rain shower", "Breakfast basket", "Swim ladder"],
-        "images": []
+        "palette": {
+          "wall": "#dbe4e6",
+          "floor": "#8d6d55",
+          "wood": "#4e4a4f",
+          "fabric": "#355d78",
+          "accent": "#5fa1b8"
+        },
+        "amenities": [
+          "Private canoe",
+          "Glass floor panel",
+          "Waterside deck",
+          "Rain shower",
+          "Breakfast basket",
+          "Swim ladder"
+        ],
+        "images": [
+          "/img/room-boathouse-1.webp",
+          "/img/room-boathouse-2.webp",
+          "/img/room-boathouse-3.webp"
+        ]
       },
       {
         "id": "summit-chalet",
@@ -191,55 +274,133 @@
         "sleeps": 5,
         "bed": "King, twin and bunk nook",
         "view": "Meadow and lake",
-        "palette": { "wall": "#ece4d2", "floor": "#a47a52", "wood": "#6a4b2f", "fabric": "#7a6a9a", "accent": "#d4a14a" },
-        "amenities": ["Two bedrooms", "Full kitchen", "Bunk nook", "Outdoor hot tub", "Sledges in winter", "Washer and dryer"],
-        "images": []
+        "palette": {
+          "wall": "#ece4d2",
+          "floor": "#a47a52",
+          "wood": "#6a4b2f",
+          "fabric": "#7a6a9a",
+          "accent": "#d4a14a"
+        },
+        "amenities": [
+          "Two bedrooms",
+          "Full kitchen",
+          "Bunk nook",
+          "Outdoor hot tub",
+          "Sledges in winter",
+          "Washer and dryer"
+        ],
+        "images": [
+          "/img/room-chalet-1.webp",
+          "/img/room-chalet-2.webp",
+          "/img/room-chalet-3.webp"
+        ]
       }
-    ]
+    ],
+    "intro": "Five kinds of room, twelve in all, each built around a single view. Scroll to turn the pages, and open any plate for the full story."
   },
   "day": {
-    "kicker": "A day here",
+    "kicker": "Chapter III · A day here",
     "title": "One day, drawn on the water.",
     "body": "Everything below is included with your stay. Book a guide at the front desk the night before.",
     "stops": [
-      { "at": 0.04, "time": "06:00", "title": "Dawn paddle", "text": "Canoes leave the jetty while the mist is still on the water. Heron Point and back in an hour." },
-      { "at": 0.24, "time": "08:30", "title": "Breakfast on the jetty", "text": "Rye bread from the wood oven, lake trout, and honey from the hives behind the lodge." },
-      { "at": 0.46, "time": "11:00", "title": "Larch Steps ridge walk", "text": "A guided three-hour loop with the whole lake below you and lunch packed in your bag." },
-      { "at": 0.68, "time": "16:00", "title": "Cedar sauna and cold plunge", "text": "Heat in the floating sauna, then down the ladder into the lake. Repeat until it feels right." },
-      { "at": 0.86, "time": "19:30", "title": "Supper at the Boathouse", "text": "Six courses from the valley, served at one long table as the sun leaves the peaks." },
-      { "at": 0.99, "time": "22:30", "title": "Stargazing raft", "text": "Blankets, cocoa and a telescope on a raft moored in the middle of the lake." }
+      {
+        "at": 0.04,
+        "time": "06:00",
+        "title": "Dawn paddle",
+        "text": "Canoes leave the jetty while the mist is still on the water. Heron Point and back in an hour.",
+        "image": "/img/day-paddle.webp"
+      },
+      {
+        "at": 0.24,
+        "time": "08:30",
+        "title": "Breakfast on the jetty",
+        "text": "Rye bread from the wood oven, lake trout, and honey from the hives behind the lodge.",
+        "image": "/img/day-breakfast.webp"
+      },
+      {
+        "at": 0.46,
+        "time": "11:00",
+        "title": "Larch Steps ridge walk",
+        "text": "A guided three-hour loop with the whole lake below you and lunch packed in your bag.",
+        "image": "/img/day-ridge.webp"
+      },
+      {
+        "at": 0.68,
+        "time": "16:00",
+        "title": "Cedar sauna and cold plunge",
+        "text": "Heat in the floating sauna, then down the ladder into the lake. Repeat until it feels right.",
+        "image": "/img/day-sauna.webp"
+      },
+      {
+        "at": 0.86,
+        "time": "19:30",
+        "title": "Supper at the Boathouse",
+        "text": "Six courses from the valley, served at one long table as the sun leaves the peaks.",
+        "image": "/img/day-supper.webp"
+      },
+      {
+        "at": 0.99,
+        "time": "22:30",
+        "title": "Stargazing raft",
+        "text": "Blankets, cocoa and a telescope on a raft moored in the middle of the lake.",
+        "image": "/img/day-stars.webp"
+      }
     ]
   },
   "reviews": {
-    "kicker": "Guests",
+    "kicker": "Chapter IV · Guests",
     "featured": {
       "quote": "We came for two nights and stayed six. The lake changes colour every hour and somehow the room changes with it.",
       "name": "Mara and Tomas",
       "detail": "Alpenglow Suite, September"
     },
     "items": [
-      { "quote": "The canoe under the boathouse was the best thing that has ever been included in a room rate.", "name": "Priya S.", "detail": "Boathouse Studio" },
-      { "quote": "Quiet in the way only real quiet is. Our kids still talk about the stargazing raft.", "name": "The Okafor family", "detail": "Summit Chalet" },
-      { "quote": "I booked by WhatsApp in the evening and had a handwritten note waiting on the bed.", "name": "Jonas W.", "detail": "Lakeside Cabin" }
+      {
+        "quote": "The canoe under the boathouse was the best thing that has ever been included in a room rate.",
+        "name": "Priya S.",
+        "detail": "Boathouse Studio"
+      },
+      {
+        "quote": "Quiet in the way only real quiet is. Our kids still talk about the stargazing raft.",
+        "name": "The Okafor family",
+        "detail": "Summit Chalet"
+      },
+      {
+        "quote": "I booked by WhatsApp in the evening and had a handwritten note waiting on the bed.",
+        "name": "Jonas W.",
+        "detail": "Lakeside Cabin"
+      }
     ],
     "rating": "4.9 from 812 stays"
   },
   "booking": {
-    "kicker": "Book",
+    "kicker": "Chapter V · Reservations",
     "title": "Request your stay.",
-    "body": "Pick your dates and room and we will confirm availability within a few hours. No payment is taken online.",
+    "body": "Write to the concierge with your dates and room. We reply within a few hours to confirm, and no payment is taken online.",
     "cleaningFee": 45,
     "taxRate": 0.08,
     "taxLabel": "Local taxes",
     "cleaningLabel": "Cleaning fee",
     "minNights": 1,
     "maxNights": 28,
-    "whatsappLabel": "Request on WhatsApp",
-    "emailLabel": "Request by email",
-    "note": "This is a template demo. Requests open WhatsApp or your email app with the details filled in."
+    "whatsappLabel": "Send by WhatsApp",
+    "emailLabel": "Send by email",
+    "note": "A template demonstration. Your request opens WhatsApp or your email app with the letter filled in.",
+    "cardTitle": "Reservation request",
+    "image": {
+      "src": "/img/book-table.webp",
+      "alt": "Candles lit along a long wooden supper table",
+      "caption": "Fig. 4. Supper at the Boathouse is served at eight."
+    }
   },
   "footer": {
     "line": "Twelve rooms, one lake, no hurry.",
-    "credit": "Scrollcraft Travel, a free MIT template. Solvei is fictional."
+    "colophon": "Set in Cormorant Garamond and Inter. Photographs from Pexels, credited in the README.",
+    "credit": "Scrollcraft Travel, a free MIT template. Solvei is fictional.",
+    "image": {
+      "src": "/img/footer-night.webp",
+      "alt": "The Milky Way above a mountain lake at night",
+      "caption": "Fig. 5. The view from the stargazing raft."
+    }
   }
 }

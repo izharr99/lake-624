@@ -1,50 +1,68 @@
 import { content, money } from '../content'
-import { sceneSVG } from './scene'
-import { roomArt, roomMedia } from './roomArt'
+import { roomMedia } from './roomArt'
 
-const { brand, hero, arrival, rooms, day, reviews, booking, footer, nav } = content
+const { brand, hero, arrival, rooms, day, reviews, booking, footer, nav, contact } = content
 
-const esc = (s: string): string =>
+export const esc = (s: string): string =>
   s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string)
 
-/** The room shown inside the window during the fly-through. */
-export const ARRIVAL_ROOM = rooms.items.find((r) => r.id === 'alpenglow-suite') ?? rooms.items[0]
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII']
+export const roman = (n: number): string => ROMAN[n] ?? String(n + 1)
+const folio = (n: number): string => `<span class="folio" aria-hidden="true">${String(n).padStart(2, '0')}</span>`
 
 function navHTML(): string {
   return `
 <header class="nav" data-nav>
   <a class="nav__brand" href="#top" aria-label="${esc(brand.fullName)}, back to top">${esc(brand.name)}</a>
+  <p class="nav__issue label">${esc(brand.issueTitle)} · ${esc(brand.issue)} · ${esc(brand.season)}</p>
   <nav aria-label="Primary">
     <ul class="nav__links">
-      ${nav.map((n) => `<li><a href="${n.href}">${esc(n.label)}</a></li>`).join('')}
+      ${nav.map((n) => `<li><a class="label" href="${n.href}">${esc(n.label)}</a></li>`).join('')}
     </ul>
   </nav>
 </header>`
 }
 
 function heroHTML(): string {
+  const { desktop, mobile } = hero.sequence
   const first = hero.phases[0]
+  const frame = (seq: typeof desktop, i: number): string =>
+    `${seq.path}${String(i).padStart(seq.digits, '0')}.${seq.ext}`
+  // The poster is the first frame for motion users; reduced-motion users get a sunset still.
+  const pick = (seq: typeof desktop): number => (matchMedia('(prefers-reduced-motion: reduce)').matches ? Math.round(seq.count * 0.82) : 1)
   return `
 <section class="hero" id="top" aria-labelledby="hero-title" data-hero>
   <div class="hero__stage" data-hero-stage>
-    <div class="hero__scene" data-scene-wrap>${sceneSVG()}</div>
-    <div class="hero__interior" data-interior aria-hidden="true">${roomArt(ARRIVAL_ROOM, 'bed', true)}</div>
+    <picture class="hero__poster">
+      <source media="(max-aspect-ratio: 9/10)" srcset="${frame(mobile, pick(mobile))}" width="${mobile.width}" height="${mobile.height}">
+      <img src="${frame(desktop, pick(desktop))}" width="${desktop.width}" height="${desktop.height}" alt="${esc(hero.alt)}" fetchpriority="high">
+    </picture>
+    <canvas class="hero__canvas" data-seq aria-hidden="true"></canvas>
+    <div class="hero__grade" data-grade aria-hidden="true"></div>
+    <figure class="hero__photo hero__exterior" data-exterior>
+      <img src="${hero.exterior.src}" alt="${esc(hero.exterior.alt)}" loading="lazy" decoding="async" style="object-position:${hero.exterior.focus[0] * 100}% ${hero.exterior.focus[1] * 100}%">
+    </figure>
+    <figure class="hero__photo hero__interior" data-interior>
+      <img src="${hero.interior.src}" alt="${esc(hero.interior.alt)}" loading="lazy" decoding="async" style="object-position:50% 78%">
+    </figure>
+    <div class="hero__vignette" aria-hidden="true"></div>
     <div class="hero__copy" data-hero-copy>
-      <p class="kicker">${esc(hero.kicker)}</p>
+      <p class="label">${esc(hero.kicker)}</p>
       <h1 class="hero__title" id="hero-title">${esc(hero.title)}</h1>
       <p class="hero__lede">${esc(hero.lede)}</p>
     </div>
-    <div class="hero__clock" data-clock aria-live="off">
+    <p class="hero__clock" data-clock>
+      <span class="label">${esc(hero.caption)}</span>
       <span class="hero__time" data-clock-time>${first.time}</span>
       <span class="hero__phase" data-clock-label>${esc(first.label)}</span>
-      <span class="hero__bar"><span data-clock-bar></span></span>
-    </div>
+      <span class="hero__bar" aria-hidden="true"><span data-clock-bar></span></span>
+    </p>
     <div class="hero__arrival" data-arrival>
-      <p class="kicker">${esc(arrival.kicker)}</p>
+      <p class="label">${esc(arrival.kicker)}</p>
       <h2 class="display">${esc(arrival.title)}</h2>
-      <p>${esc(arrival.body)}</p>
+      <p class="dropcap">${esc(arrival.body)}</p>
     </div>
-    <p class="hero__hint" data-hint><span>${esc(hero.scrollHint)}</span></p>
+    <p class="hero__hint label" data-hint><span>${esc(hero.scrollHint)}</span></p>
   </div>
 </section>`
 }
@@ -54,13 +72,13 @@ function roomsHTML(): string {
     .map(
       (r, i) => `
     <li class="rail__item">
-      <button class="card" type="button" data-room="${r.id}" aria-haspopup="dialog" aria-label="Open ${esc(r.name)}, ${money(r.price)} ${esc(rooms.perNight)}">
-        <span class="card__media" data-flip-id="room-${r.id}" data-night="${i % 2 === 1}">${roomMedia(r, 0, i % 2 === 1)}</span>
-        <span class="card__body">
-          <span class="card__index">${String(i + 1).padStart(2, '0')}</span>
-          <span class="card__name">${esc(r.name)}</span>
-          <span class="card__short">${esc(r.short)}</span>
-          <span class="card__meta"><span>${esc(r.size)} · sleeps ${r.sleeps}</span><strong>${money(r.price)}<small> / night</small></strong></span>
+      <button class="plate" type="button" data-room="${r.id}" aria-haspopup="dialog" aria-label="Open ${esc(r.name)}, ${money(r.price)} ${esc(rooms.perNight)}">
+        <span class="plate__media" data-flip-id="room-${r.id}">${roomMedia(r, 0)}</span>
+        <span class="plate__caption">
+          <span class="label">Plate ${roman(i)} · ${esc(r.view)}</span>
+          <span class="plate__name">${esc(r.name)}</span>
+          <span class="plate__short">${esc(r.short)}</span>
+          <span class="plate__meta"><span class="label">${esc(r.size)} · Sleeps ${r.sleeps}</span><span class="plate__price">${money(r.price)} <em>${esc(rooms.perNight)}</em></span></span>
         </span>
       </button>
     </li>`,
@@ -69,23 +87,32 @@ function roomsHTML(): string {
   return `
 <section class="rooms" id="rooms" data-nav-ink="dark" aria-labelledby="rooms-title" data-rooms>
   <div class="rooms__pin" data-rooms-pin>
-    <div class="section-head">
-      <p class="kicker">${esc(rooms.kicker)}</p>
-      <h2 class="display" id="rooms-title">${esc(rooms.title)}</h2>
-      <p class="muted">${esc(rooms.hint)}</p>
+    <div class="spread-head">
+      <p class="label">${esc(rooms.kicker)}</p>
+      <h2 class="display" id="rooms-title" data-lines>${esc(rooms.title)}</h2>
+      <p class="spread-head__intro">${esc(rooms.intro)}</p>
     </div>
     <ul class="rail" data-rail>${cards}</ul>
-    <div class="rooms__progress" aria-hidden="true"><span data-rail-progress></span></div>
+    <div class="rooms__foot">
+      <span class="label">${esc(rooms.hint)}</span>
+      <span class="rooms__progress" aria-hidden="true"><span data-rail-progress></span></span>
+      ${folio(12)}
+    </div>
   </div>
 </section>
 <dialog class="detail" data-detail aria-labelledby="detail-title"></dialog>`
 }
+
+const ROUTE =
+  'M250 470C210 420 190 330 260 270C330 210 420 240 470 200C520 160 600 120 690 170C770 210 820 260 860 230C900 200 930 260 900 320C870 380 790 380 760 430C730 480 650 520 570 500C490 480 450 400 380 420C330 434 300 500 250 470Z'
 
 function dayHTML(): string {
   const stops = day.stops
     .map(
       (s, i) => `
       <li class="stop" data-stop-card="${i}">
+        ${s.image ? `<img class="stop__img" src="${s.image}" alt="${esc(s.title)}" loading="lazy" decoding="async">` : ''}
+        <span class="label">Stop ${roman(i)}</span>
         <span class="stop__time">${esc(s.time)}</span>
         <h3 class="stop__title">${esc(s.title)}</h3>
         <p>${esc(s.text)}</p>
@@ -95,31 +122,32 @@ function dayHTML(): string {
   return `
 <section class="day" id="day" data-nav-ink="dark" aria-labelledby="day-title" data-day>
   <div class="day__pin" data-day-pin>
-    <div class="section-head">
-      <p class="kicker">${esc(day.kicker)}</p>
-      <h2 class="display" id="day-title">${esc(day.title)}</h2>
-      <p class="muted">${esc(day.body)}</p>
+    <div class="spread-head">
+      <p class="label">${esc(day.kicker)}</p>
+      <h2 class="display" id="day-title" data-lines>${esc(day.title)}</h2>
+      <p class="spread-head__intro">${esc(day.body)}</p>
     </div>
     <div class="day__grid">
-      <svg class="map" viewBox="0 0 1000 700" role="img" aria-label="Map of the lake with the day's route drawn around it" data-map>
-        <path class="map__land" d="M0 0H1000V700H0Z"/>
-        <path class="map__contour" d="M90 140C260 40 520 60 700 90C880 120 960 260 930 400C900 560 720 650 520 640C300 630 120 600 70 450C30 330 0 200 90 140Z"/>
-        <path class="map__lake" d="M170 210C300 130 520 140 670 170C810 200 860 300 830 400C800 510 660 560 500 556C330 552 200 520 160 420C130 340 90 260 170 210Z"/>
-        <path class="map__ripple" d="M300 300h80M560 260h110M420 440h90M620 420h60"/>
-        <g class="map__peaks"><path d="M60 620l40-60 40 60zM120 640l50-80 50 80zM880 110l40-60 40 60zM820 130l36-50 36 50z"/></g>
-        <path class="map__route-bg" d="${ROUTE}"/>
-        <path class="map__route" d="${ROUTE}" data-route/>
-        <g data-markers></g>
-        <text class="map__label" x="470" y="360">Lake Solvei</text>
-      </svg>
+      <figure class="day__map">
+        <svg class="map" viewBox="0 0 1000 700" role="img" aria-label="Map of the lake with the day's route drawn around it" data-map>
+          <path class="map__contour" d="M90 140C260 40 520 60 700 90C880 120 960 260 930 400C900 560 720 650 520 640C300 630 120 600 70 450C30 330 0 200 90 140Z"/>
+          <path class="map__contour" d="M40 110C240 0 560 20 740 50C930 90 1010 260 980 420C950 600 740 690 520 690C280 690 80 650 30 470C0 340 -30 180 40 110Z"/>
+          <path class="map__lake" d="M170 210C300 130 520 140 670 170C810 200 860 300 830 400C800 510 660 560 500 556C330 552 200 520 160 420C130 340 90 260 170 210Z"/>
+          <path class="map__ripple" d="M300 300h80M560 260h110M420 440h90M620 420h60M250 380h40M700 330h50"/>
+          <g class="map__peaks"><path d="M60 620l40-60 40 60M120 640l50-80 50 80M880 110l40-60 40 60M820 130l36-50 36 50"/></g>
+          <path class="map__route-bg" d="${ROUTE}"/>
+          <path class="map__route" d="${ROUTE}" data-route/>
+          <g data-markers></g>
+          <text class="map__label" x="500" y="360">Lake Solvei</text>
+          <g class="map__compass" transform="translate(930 620)"><path d="M0 -34L7 0L0 34L-7 0Z"/><text y="-42">N</text></g>
+        </svg>
+        <figcaption class="caption">Fig. 2. The route, drawn as the day goes by.</figcaption>
+      </figure>
       <ol class="stops" data-stops>${stops}</ol>
     </div>
   </div>
 </section>`
 }
-
-const ROUTE =
-  'M250 470C210 420 190 330 260 270C330 210 420 240 470 200C520 160 600 120 690 170C770 210 820 260 860 230C900 200 930 260 900 320C870 380 790 380 760 430C730 480 650 520 570 500C490 480 450 400 380 420C330 434 300 500 250 470Z'
 
 function reviewsHTML(): string {
   const words = reviews.featured.quote
@@ -128,63 +156,77 @@ function reviewsHTML(): string {
     .join(' ')
   return `
 <section class="reviews" id="reviews" data-nav-ink="dark" aria-labelledby="reviews-title">
-  <div class="wrap">
-    <p class="kicker" id="reviews-title">${esc(reviews.kicker)} · ${esc(reviews.rating)}</p>
-    <figure class="featured">
+  <div class="wrap reviews__grid">
+    <p class="label reviews__kicker" id="reviews-title">${esc(reviews.kicker)}<br><span class="muted">${esc(reviews.rating)}</span></p>
+    <figure class="pull">
       <blockquote data-reveal-words><p>${words}</p></blockquote>
-      <figcaption>${esc(reviews.featured.name)}, <span class="muted">${esc(reviews.featured.detail)}</span></figcaption>
+      <figcaption class="label">${esc(reviews.featured.name)} · <span class="muted">${esc(reviews.featured.detail)}</span></figcaption>
     </figure>
     <ul class="quotes">
       ${reviews.items
         .map(
           (r) => `<li class="quote" data-rise>
         <figure><blockquote><p>${esc(r.quote)}</p></blockquote>
-        <figcaption>${esc(r.name)} <span class="muted">${esc(r.detail)}</span></figcaption></figure></li>`,
+        <figcaption class="label">${esc(r.name)}<br><span class="muted">${esc(r.detail)}</span></figcaption></figure></li>`,
         )
         .join('')}
     </ul>
+    ${folio(31)}
   </div>
 </section>`
 }
 
 function bookingHTML(): string {
   const maxGuests = Math.max(...rooms.items.map((r) => r.sleeps))
+  const words = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
   return `
-<section class="book" id="book" data-nav-ink="light" aria-labelledby="book-title">
+<section class="book" id="book" data-nav-ink="dark" aria-labelledby="book-title">
   <div class="wrap book__grid">
-    <div class="section-head">
-      <p class="kicker">${esc(booking.kicker)}</p>
-      <h2 class="display" id="book-title">${esc(booking.title)}</h2>
-      <p>${esc(booking.body)}</p>
+    <div class="book__intro">
+      <p class="label">${esc(booking.kicker)}</p>
+      <h2 class="display" id="book-title" data-lines>${esc(booking.title)}</h2>
+      <p class="dropcap">${esc(booking.body)}</p>
+      <figure class="book__plate">
+        <img src="${booking.image.src}" alt="${esc(booking.image.alt)}" loading="lazy" decoding="async">
+        <figcaption class="caption">${esc(booking.image.caption ?? '')}</figcaption>
+      </figure>
       <address class="book__contact">
-        <a href="mailto:${content.contact.email}">${esc(content.contact.email)}</a><br>
-        <span>${esc(content.contact.phoneDisplay)}</span><br>
-        <span class="muted">${esc(content.contact.address)}</span>
+        <span class="label">The concierge</span>
+        <a href="mailto:${contact.email}">${esc(contact.email)}</a>
+        <span>${esc(contact.phoneDisplay)}</span>
+        <span class="muted">${esc(contact.address)}</span>
       </address>
     </div>
-    <form class="form" data-booking novalidate>
-      <label class="field field--wide">
-        <span>Room</span>
-        <select name="room" data-f-room>
-          ${rooms.items.map((r) => `<option value="${r.id}">${esc(r.name)}, ${money(r.price)} / night</option>`).join('')}
-        </select>
-      </label>
-      <label class="field"><span>Check in</span><input type="date" name="in" required data-f-in></label>
-      <label class="field"><span>Check out</span><input type="date" name="out" required data-f-out></label>
-      <label class="field">
-        <span>Guests</span>
-        <select name="guests" data-f-guests>
-          ${Array.from({ length: maxGuests }, (_, i) => `<option value="${i + 1}"${i === 1 ? ' selected' : ''}>${i + 1} ${i === 0 ? 'guest' : 'guests'}</option>`).join('')}
-        </select>
-      </label>
-      <label class="field"><span>Your name</span><input type="text" name="name" autocomplete="name" placeholder="Optional" data-f-name></label>
+    <form class="card" data-booking novalidate aria-label="${esc(booking.cardTitle)}">
+      <div class="card__head">
+        <p class="label">${esc(booking.cardTitle)}</p>
+        <p class="card__brand">${esc(brand.fullName)}</p>
+        <span class="card__rule" aria-hidden="true">✦</span>
+      </div>
+      <p class="letter">
+        <span>Dear concierge, I would like to reserve the</span>
+        <label class="inline"><span class="sr">Room</span><select name="room" data-f-room>
+          ${rooms.items.map((r) => `<option value="${r.id}">${esc(r.name)}</option>`).join('')}
+        </select></label>
+        <span>for</span>
+        <label class="inline"><span class="sr">Guests</span><select name="guests" data-f-guests>
+          ${Array.from({ length: maxGuests }, (_, i) => `<option value="${i + 1}"${i === 1 ? ' selected' : ''}>${words[i] ?? i + 1} ${i === 0 ? 'guest' : 'guests'}</option>`).join('')}
+        </select></label>
+        <span>, arriving on</span>
+        <label class="inline"><span class="sr">Check in</span><input type="date" name="in" required data-f-in></label>
+        <span>and leaving on</span>
+        <label class="inline"><span class="sr">Check out</span><input type="date" name="out" required data-f-out></label>.
+        <span>Kindly hold it under the name</span>
+        <label class="inline inline--name"><span class="sr">Your name</span><input type="text" name="name" autocomplete="name" placeholder="your name" data-f-name></label>.
+      </p>
+      <p class="label card__account">The account</p>
       <dl class="summary" data-summary aria-live="polite"></dl>
       <p class="form__error" data-error role="alert"></p>
-      <div class="form__actions">
-        <a class="btn btn--primary" data-wa target="_blank" rel="noopener">${esc(booking.whatsappLabel)}</a>
-        <a class="btn" data-mail>${esc(booking.emailLabel)}</a>
+      <div class="card__actions">
+        <a class="btn btn--ink" data-wa target="_blank" rel="noopener">${esc(booking.whatsappLabel)}</a>
+        <a class="btn btn--line" data-mail>${esc(booking.emailLabel)}</a>
       </div>
-      <p class="form__note muted">${esc(booking.note)}</p>
+      <p class="caption card__note">${esc(booking.note)}</p>
     </form>
   </div>
 </section>`
@@ -193,11 +235,19 @@ function bookingHTML(): string {
 function footerHTML(): string {
   return `
 <footer class="footer" data-nav-ink="light">
-  <div class="wrap">
-    <p class="footer__brand">${esc(brand.fullName)}</p>
+  <figure class="footer__plate">
+    <img src="${footer.image.src}" alt="${esc(footer.image.alt)}" loading="lazy" decoding="async">
+    <figcaption class="caption">${esc(footer.image.caption ?? '')}</figcaption>
+  </figure>
+  <div class="wrap footer__grid">
+    <p class="footer__brand">${esc(brand.name)}</p>
     <p class="footer__line">${esc(footer.line)}</p>
-    <p class="muted">${esc(brand.coordinates)} · ${esc(brand.established)}</p>
-    <p class="muted small">${esc(footer.credit)}</p>
+    <div class="footer__cols">
+      <p><span class="label">Find us</span>${esc(contact.address)}<br>${esc(brand.coordinates)}</p>
+      <p><span class="label">Write</span><a href="mailto:${contact.email}">${esc(contact.email)}</a><br>${esc(contact.phoneDisplay)}</p>
+      <p><span class="label">Colophon</span>${esc(footer.colophon)}</p>
+    </div>
+    <p class="caption footer__credit">${esc(brand.issueTitle)} · ${esc(brand.issue)} · ${esc(brand.established)}. ${esc(footer.credit)}</p>
   </div>
 </footer>`
 }
@@ -205,5 +255,3 @@ function footerHTML(): string {
 export function renderPage(root: HTMLElement): void {
   root.innerHTML = `${navHTML()}<main>${heroHTML()}${roomsHTML()}${dayHTML()}${reviewsHTML()}${bookingHTML()}</main>${footerHTML()}`
 }
-
-export { esc }

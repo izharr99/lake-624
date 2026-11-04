@@ -1,22 +1,26 @@
 import raw from './content.json'
 
-/** Colour keyframe for the day-to-night hero. `at` is scroll progress 0..1. */
+/** Clock keyframe for the hero time-lapse. `at` is progress through the footage, 0..1. */
 export interface Phase {
   at: number
   time: string
   label: string
-  skyTop: string
-  skyMid: string
-  skyHorizon: string
-  far: string
-  mid: string
-  near: string
-  water: string
-  text: string
-  /** 0..1 how lit the lodge windows are */
-  windows: number
-  /** 0..1 star visibility */
-  stars: number
+}
+
+/** A numbered WebP frame sequence in /public, e.g. /seq/d/001.webp. */
+export interface Sequence {
+  path: string
+  count: number
+  digits: number
+  ext: string
+  width: number
+  height: number
+}
+
+export interface Picture {
+  src: string
+  alt: string
+  caption?: string
 }
 
 export interface RoomPalette {
@@ -39,7 +43,7 @@ export interface Room {
   view: string
   palette: RoomPalette
   amenities: string[]
-  /** Optional photo paths in /public. When empty, illustrated art is generated from `palette`. */
+  /** Photo paths in /public. When empty, illustrated art is generated from `palette`. */
   images: string[]
 }
 
@@ -49,6 +53,7 @@ export interface Stop {
   time: string
   title: string
   text: string
+  image?: string
 }
 
 export interface Review {
@@ -66,15 +71,30 @@ export interface Content {
     location: string
     coordinates: string
     established: string
+    issue: string
+    issueTitle: string
+    season: string
   }
   contact: { whatsapp: string; email: string; phoneDisplay: string; address: string }
   theme: Record<string, string>
   nav: { label: string; href: string }[]
-  hero: { kicker: string; title: string; lede: string; scrollHint: string; phases: Phase[] }
+  hero: {
+    kicker: string
+    title: string
+    lede: string
+    caption: string
+    scrollHint: string
+    alt: string
+    sequence: { desktop: Sequence; mobile: Sequence }
+    exterior: Picture & { focus: number[]; time: string; label: string }
+    interior: Picture
+    phases: Phase[]
+  }
   arrival: { kicker: string; title: string; body: string }
   rooms: {
     kicker: string
     title: string
+    intro: string
     hint: string
     currency: string
     currencySymbol: string
@@ -87,6 +107,7 @@ export interface Content {
     kicker: string
     title: string
     body: string
+    cardTitle: string
     cleaningFee: number
     taxRate: number
     taxLabel: string
@@ -96,8 +117,9 @@ export interface Content {
     whatsappLabel: string
     emailLabel: string
     note: string
+    image: Picture
   }
-  footer: { line: string; credit: string }
+  footer: { line: string; colophon: string; credit: string; image: Picture }
 }
 
 export const content: Content = raw

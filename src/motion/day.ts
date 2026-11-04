@@ -57,9 +57,9 @@ export function initDay(reduced: boolean): void {
     scrollTrigger: {
       trigger: pin,
       start: 'top top',
-      end: () => `+=${window.innerHeight * 2.5}`,
+      end: () => `+=${window.innerHeight * 3}`,
       pin: true,
-      scrub: 0.6,
+      scrub: 1.4,
     },
     onUpdate: () => {
       const p = state.p

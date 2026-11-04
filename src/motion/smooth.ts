@@ -6,7 +6,7 @@ let lenis: Lenis | null = null
 
 /** Lenis smooth scroll driven by the GSAP ticker so ScrollTrigger stays in sync. */
 export function initSmooth(): Lenis {
-  lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 0.9 })
+  lenis = new Lenis({ lerp: 0.07, wheelMultiplier: 0.85 })
   lenis.on('scroll', ScrollTrigger.update)
   gsap.ticker.add((time) => lenis?.raf(time * 1000))
   gsap.ticker.lagSmoothing(0)
@@ -16,7 +16,7 @@ export function initSmooth(): Lenis {
 /** Scroll to an element or y position, smooth when Lenis is running. */
 export function scrollToTarget(target: HTMLElement | number): void {
   if (lenis) {
-    lenis.scrollTo(target, { duration: 1.6 })
+    lenis.scrollTo(target, { duration: 2.2, easing: (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2) })
     return
   }
   const y = typeof target === 'number' ? target : target.getBoundingClientRect().top + window.scrollY

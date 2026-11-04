@@ -17,7 +17,7 @@ export function initRail(reduced: boolean): void {
       start: 'top top',
       end: () => `+=${distance()}`,
       pin: true,
-      scrub: 0.6,
+      scrub: 1.4,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
         if (bar) bar.style.transform = `scaleX(${self.progress})`
@@ -26,7 +26,7 @@ export function initRail(reduced: boolean): void {
   })
 
   // Inner parallax: each illustration drifts inside its frame as it crosses the screen.
-  rail.querySelectorAll<HTMLElement>('.card__media .art').forEach((art) => {
+  rail.querySelectorAll<HTMLElement>('.plate__media .art').forEach((art) => {
     gsap.fromTo(
       art,
       { xPercent: -6 },

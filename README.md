@@ -1,28 +1,29 @@
 # Scrollcraft Travel
 
-A free, static, scroll-driven website template for a hotel or travel resort. Scroll works as a playhead: the hero passes a full day from sunrise to night, the camera flies through a lit window into a room, rooms slide past on a pinned rail and open into a full detail view, a route draws itself around the lake, and the page ends with a booking widget that sends a prefilled request over WhatsApp or email.
+A free, static, scroll-driven website template for a hotel or travel resort, art-directed as a printed travel magazine: quiet luxury, paper and ink, Cormorant Garamond italics, folios, captions and drop caps. Scroll works as a playhead. A real time-lapse carries the hero from first light through sunrise, afternoon and sunset into blue hour. The camera then finds the lodge with its lights on, pushes in through the windows and lands in a room. Rooms turn past as magazine plates and open into a full spread, a route draws itself around the lake, and the issue closes with a concierge card that sends a prefilled reservation request over WhatsApp or email.
 
 The demo brand, **Solvei Lake Lodge**, is fictional. Everything about it lives in one file, `src/content.json`, so you can rebrand the whole site without touching any logic.
 
 **Live demo:** https://scrollcraft-travel.vercel.app
 
-![Solvei hero at blue hour](public/og.png)
+![Solvei hero at sunrise](public/og.jpg)
 
 ## Features
 
-- **Day to night hero.** A hand-built SVG landscape (sky, sun and moon arcs, stars, three mountain layers with parallax, lake reflections, a lodge whose windows light up). Colours, the clock and the text colour are interpolated from keyframes in `content.json`.
-- **Fly-through.** The camera zooms into the lodge's picture window by animating the SVG `viewBox`, so the art stays sharp at any zoom. The interior fades in when the glass fills the screen.
-- **Pinned horizontal room rail** with inner parallax on each card.
-- **Shared-element room detail.** The card image morphs into the detail view with GSAP Flip and morphs back on close. The detail is a native `<dialog>` with a gallery, amenities, price per night and a "Book this room" button that preselects the room in the booking form.
-- **Itinerary map.** The route draws itself on scroll, markers are placed along the path from each stop's `at` value, and the matching stop card is shown.
-- **Guest reviews** with a word-by-word scroll reveal.
-- **Booking widget.** Dates, guests and room give nights × price, cleaning fee, taxes and an estimated total, all client-side. Requests open WhatsApp (`wa.me`) or the visitor's email app with every detail filled in. No backend and no API keys.
-- **Generated room art.** Each room gets three illustrations (bedroom, bath, terrace) drawn in SVG from its colour palette. If you add photo paths, the photos are used instead.
-- **Accessible and fast.** Semantic HTML, real buttons, a skip link, alt text on all art, and focus handling in the dialog. Full `prefers-reduced-motion` fallback with no smooth scroll, pins or morphs. No raster images in the page itself, fonts are self-hosted, and the JS is about 75 kB gzipped.
+- **Real sunrise to sunset hero.** Two Pexels time-lapses (a sunrise over a mountain range and a sunset behind the hills of a lake) are stitched with a crossfade and cut into WebP frame sequences: 150 landscape frames for desktop (4.8 MB) and 100 portrait frames cropped around the sun for phones (2.1 MB). A canvas scrubs them with scroll, the clock reads the time of day from keyframes in `content.json`, and a blue-hour grade closes the day.
+- **Progressive frame loading.** The first frame ships as an `<img>` poster, then frames stream in coarse to fine (every 16th, 8th, 4th, 2nd, then all) after the page is idle, so the full scroll range works early on slow connections.
+- **Fly-through.** A slow crossfade to the lit lodge at dusk, then a camera push towards its windows (focus point set in `content.json`) and a crossfade into the room.
+- **Rooms as magazine plates** on a pinned horizontal rail, staggered like a layout, with gentle inner parallax.
+- **Shared-element room spread.** The plate morphs into a two-page spread with GSAP Flip (slow `expo.inOut`), with a captioned gallery, facts, amenities and a "Reserve this room" button that fills in the concierge card.
+- **A day here.** A line-art map of the lake whose route draws itself on scroll. Markers are placed along the path from each stop's `at` value, and each stop shows its photograph.
+- **Guests.** A pull quote that inks in word by word, then quotes set in hairline columns.
+- **Concierge card.** The booking form reads as a letter ("Dear concierge, I would like to reserve the...") with inline fields, an account with dotted leaders (nights × rate, cleaning fee, taxes, total), and "Send by WhatsApp" or "Send by email" links filled in with every detail. Everything runs client-side, with no backend and no API keys.
+- **Calm motion.** Lenis smooth scroll, long sine and expo eases, line-by-line heading reveals through masks (GSAP SplitText), and slow crossfades. Nothing bounces.
+- **Accessible and light.** Semantic HTML, real buttons, alt text on every photograph, a native `<dialog>`, a skip link, and fixed aspect ratios so nothing shifts. With `prefers-reduced-motion`, the hero is a still sunset frame followed by the lodge and the room as plain plates, with no pins, morphs or smooth scroll.
 
 ## Stack
 
-Vite, TypeScript (vanilla, no framework), GSAP with ScrollTrigger and Flip, Lenis smooth scroll, and Fontsource (Fraunces and Inter).
+Vite, TypeScript (vanilla, no framework), GSAP (ScrollTrigger, Flip, SplitText), Lenis, and Fontsource (Cormorant Garamond and Inter).
 
 ## Run it
 
@@ -39,39 +40,65 @@ Deploy `dist/` to any static host. On Vercel, the default Vite preset works with
 
 | Key | What it controls |
 | --- | --- |
-| `brand` | Name, full name, tagline, meta description, location, coordinates. These are also injected into `<title>` and the social meta tags at build time. |
+| `brand` | Name, issue number, issue title, season, tagline, meta description, location. These are also injected into `<title>` and the social tags at build time. |
 | `contact` | `whatsapp` (international format, digits only), `email`, the phone number shown on the page, and the address. |
-| `theme` | Page colours. Each key becomes a CSS variable, so `paperDeep` becomes `--paper-deep`. |
-| `nav` | Top navigation links. |
-| `hero.phases` | Time-of-day keyframes. `at` is scroll progress from 0 to 1. Each phase sets the sky, mountain, water and text colours, how lit the windows are (`windows`), and star visibility (`stars`). The clock shows times interpolated between phases. |
-| `arrival` | The copy shown after the fly-through. |
-| `rooms.items` | Rooms: `name`, `short`, `description`, `price`, `size`, `sleeps`, `bed`, `view`, `amenities`, and a `palette` for the generated art. Add `images: ["/rooms/cabin-1.webp", ...]` to use photos from `public/` instead. |
-| `rooms.currencySymbol` | The currency symbol used across the site. |
-| `day.stops` | Itinerary stops. `at` (0 to 1) is the stop's position along the route. |
-| `reviews` | The featured quote, the quote cards and the rating line. |
-| `booking` | Cleaning fee, tax rate, labels, and minimum and maximum nights. |
-| `footer` | Footer copy. |
+| `theme` | Paper, ink and accent colours. Each key becomes a CSS variable (`paperDeep` becomes `--paper-deep`). |
+| `hero.sequence` | The frame folders for desktop and mobile: path, frame count, digits and extension. |
+| `hero.phases` | Clock keyframes. `at` is progress through the footage (0 to 1), with the time and label shown. |
+| `hero.exterior`, `hero.interior` | Photos for the fly-through. `focus` is the point the camera pushes towards, as `[x, y]` fractions. |
+| `rooms.items` | Rooms: name, copy, price, size, sleeps, bed, view, amenities and `images` (the first is the plate). If `images` is empty, an illustrated room is drawn from `palette` instead. |
+| `day.stops` | Itinerary stops with `at` (position along the route), time, title, text and `image`. |
+| `reviews`, `booking`, `footer` | Copy, fees and tax rate, labels and photographs. |
 
-To change the landscape itself (mountain shapes, lodge, window positions), edit `src/render/scene.ts`. The window the camera flies into is `TARGET_WINDOW`.
+### Use your own footage
+
+Any time-lapse works. To cut a sequence with ffmpeg and cwebp:
+
+```bash
+ffmpeg -i timelapse.mp4 -vf "fps=150/DURATION,scale=1280:720" frames/%03d.png
+for f in frames/*.png; do cwebp -q 62 "$f" -o "public/seq/d/$(basename "${f%.png}").webp"; done
+# portrait set for phones: crop a 9:16 window around the sun, then scale to 540x960
+```
+
+Then update `hero.sequence` and `hero.phases`.
 
 ## Project structure
 
 ```
 src/
-  content.json        all copy, prices, colours and contact details
+  content.json        all copy, prices, images, sequence settings and contact details
   content.ts          types for content.json and the money formatter
   booking.ts          price calculation and WhatsApp / mailto links
-  render/             HTML and SVG string builders (page, scene, room art)
+  lib/sequence.ts     progressive frame loader and canvas cover renderer
+  lib/phase.ts        clock interpolation for the hero
+  render/             HTML builders (page, room media with illustrated fallback)
   motion/             one module per scroll moment (hero, rail, detail, day, reveals, nav, smooth)
-  lib/phase.ts        keyframe sampling for the day-to-night colours
+public/
+  seq/d, seq/m        time-lapse frame sequences (desktop, mobile)
+  img/                photographs (WebP)
 ```
 
 ## Credits
 
-- All illustrations are original SVG made for this template. No stock photos or video are used.
-- Fonts: [Fraunces](https://fonts.google.com/specimen/Fraunces) and [Inter](https://rsms.me/inter/) (SIL Open Font License), self-hosted via [Fontsource](https://fontsource.org).
-- Motion: [GSAP](https://gsap.com) (free under the GSAP standard license) and [Lenis](https://lenis.darkroom.engineering) (MIT).
+All footage and photographs come from [Pexels](https://www.pexels.com) under the [Pexels License](https://www.pexels.com/license/), which allows free commercial use without attribution. They are credited here anyway, with thanks to the photographers. They were downloaded, cropped and compressed to WebP for this template.
+
+**Video**
+- Sunrise time-lapse: [Beautiful Sunrise Time Lapse](https://www.pexels.com/video/beautiful-sunrise-time-lapse-5379825/)
+- Sunset time-lapse: [Time Lapse of a Sunset by the Lake](https://www.pexels.com/video/time-lapse-of-a-sunset-by-the-lake-9564200/)
+
+**Photographs** (Pexels photo IDs, each at `https://www.pexels.com/photo/<id>/`)
+- Lodge at dusk: [28271971](https://www.pexels.com/photo/28271971/) (eberhard grossgasteiger)
+- A-frame interior: [19737838](https://www.pexels.com/photo/19737838/)
+- Lakeside Cabin: [19737839](https://www.pexels.com/photo/19737839/), [5604254](https://www.pexels.com/photo/5604254/), [547114](https://www.pexels.com/photo/547114/)
+- Pine Loft: [16747776](https://www.pexels.com/photo/16747776/), [10560268](https://www.pexels.com/photo/10560268/), [14945914](https://www.pexels.com/photo/14945914/)
+- Alpenglow Suite: [775219](https://www.pexels.com/photo/775219/), [105934](https://www.pexels.com/photo/105934/), [30835932](https://www.pexels.com/photo/30835932/)
+- Boathouse Studio: [10530007](https://www.pexels.com/photo/10530007/), [29953197](https://www.pexels.com/photo/29953197/), [15953852](https://www.pexels.com/photo/15953852/)
+- Summit Chalet: [9056661](https://www.pexels.com/photo/9056661/), [3551230](https://www.pexels.com/photo/3551230/), [29887320](https://www.pexels.com/photo/29887320/)
+- A day here: [4034973](https://www.pexels.com/photo/4034973/), [5720803](https://www.pexels.com/photo/5720803/), [2387876](https://www.pexels.com/photo/2387876/) (Sam Kolder), [8929569](https://www.pexels.com/photo/8929569/), [4992827](https://www.pexels.com/photo/4992827/), [2605867](https://www.pexels.com/photo/2605867/)
+- Supper table: [4989546](https://www.pexels.com/photo/4989546/). Night sky: [18780512](https://www.pexels.com/photo/18780512/)
+
+Fonts: [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) and [Inter](https://rsms.me/inter/) (SIL Open Font License) via [Fontsource](https://fontsource.org). Motion: [GSAP](https://gsap.com) (free standard license) and [Lenis](https://lenis.darkroom.engineering) (MIT).
 
 ## License
 
-MIT. See [LICENSE](LICENSE). Solvei Lake Lodge, its rooms, reviews and contact details are fictional.
+The code is MIT; see [LICENSE](LICENSE). Photographs and footage stay under the Pexels License. Solvei Lake Lodge, its rooms, reviews and contact details are fictional.

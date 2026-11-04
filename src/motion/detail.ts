@@ -1,7 +1,7 @@
 import { gsap } from 'gsap'
 import { Flip } from 'gsap/Flip'
 import { content, money, type Room } from '../content'
-import { esc } from '../render/page'
+import { esc, roman } from '../render/page'
 import { galleryCount, roomMedia } from '../render/roomArt'
 import { lockScroll, scrollToTarget } from './smooth'
 import { selectRoom } from '../booking'
@@ -27,19 +27,29 @@ export function initDetail(reduced: boolean): void {
       (_, i) =>
         `<button type="button" class="thumb${i === 0 ? ' is-active' : ''}" data-thumb="${i}" aria-label="Show image ${i + 1} of ${n}" aria-pressed="${i === 0}">${roomMedia(room, i, i === 0 ? night : false)}</button>`,
     ).join('')
+    const index = content.rooms.items.indexOf(room)
     return `
     <div class="detail__inner">
-      <div class="detail__media" data-flip-id="room-${room.id}">${slides}</div>
+      <figure class="detail__figure">
+        <div class="detail__media" data-flip-id="room-${room.id}">${slides}</div>
+        <figcaption class="caption detail__caption">Plate ${roman(index)}. ${esc(room.name)}, ${esc(room.view.toLowerCase())} view.</figcaption>
+      </figure>
       <div class="detail__info" data-detail-info>
-        <button type="button" class="detail__close" data-close aria-label="Close room details"><span aria-hidden="true">×</span></button>
-        <div class="thumbs" role="group" aria-label="Gallery">${thumbs}</div>
-        <p class="kicker">${esc(room.view)} view · ${esc(room.size)} · sleeps ${room.sleeps}</p>
+        <button type="button" class="detail__close label" data-close aria-label="Close room details">Close</button>
+        <p class="label">Plate ${roman(index)} · ${esc(room.view)} view</p>
         <h2 class="detail__title display" id="detail-title">${esc(room.name)}</h2>
-        <p class="detail__desc">${esc(room.description)}</p>
+        <p class="detail__desc dropcap">${esc(room.description)}</p>
+        <dl class="facts">
+          <div><dt class="label">Size</dt><dd>${esc(room.size)}</dd></div>
+          <div><dt class="label">Sleeps</dt><dd>${room.sleeps}</dd></div>
+          <div><dt class="label">Bed</dt><dd>${esc(room.bed)}</dd></div>
+        </dl>
+        <p class="label">In the room</p>
         <ul class="amenities">${room.amenities.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>
+        <div class="thumbs" role="group" aria-label="Gallery">${thumbs}</div>
         <div class="detail__foot">
-          <p class="detail__price"><strong>${money(room.price)}</strong> <span class="muted">${esc(content.rooms.perNight)}</span><br><span class="muted small">${esc(room.bed)}</span></p>
-          <button type="button" class="btn btn--primary" data-book>Book this room</button>
+          <p class="detail__price">${money(room.price)} <em>${esc(content.rooms.perNight)}</em></p>
+          <button type="button" class="btn btn--ink" data-book>Reserve this room</button>
         </div>
       </div>
     </div>`
@@ -56,7 +66,7 @@ export function initDetail(reduced: boolean): void {
 
   const open = (card: HTMLButtonElement): void => {
     const room = content.rooms.items.find((r) => r.id === card.dataset.room)
-    const cardMedia = card.querySelector<HTMLElement>('.card__media')
+    const cardMedia = card.querySelector<HTMLElement>('.plate__media')
     if (!room || !cardMedia || busy) return
     const night = cardMedia.dataset.night === 'true'
     active = { room, card }
@@ -73,7 +83,7 @@ export function initDetail(reduced: boolean): void {
     gsap.set(cardMedia, { autoAlpha: 0 })
     Flip.from(state, {
       targets: media,
-      duration: 0.9,
+      duration: 1.4,
       ease: 'expo.inOut',
       scale: true,
       onComplete: () => {
@@ -82,18 +92,18 @@ export function initDetail(reduced: boolean): void {
     })
     gsap.from(dialog.querySelectorAll('[data-detail-info] > *'), {
       autoAlpha: 0,
-      y: 30,
-      stagger: 0.05,
-      duration: 0.6,
-      delay: 0.45,
-      ease: 'power3.out',
+      y: 24,
+      stagger: 0.07,
+      duration: 1.2,
+      delay: 0.8,
+      ease: 'sine.out',
     })
   }
 
   const close = (then?: () => void): void => {
     if (!active || busy) return
     const { card } = active
-    const cardMedia = card.querySelector<HTMLElement>('.card__media')
+    const cardMedia = card.querySelector<HTMLElement>('.plate__media')
     const media = dialog.querySelector<HTMLElement>('.detail__media')
     const finish = (): void => {
       dialog.close()
@@ -110,15 +120,15 @@ export function initDetail(reduced: boolean): void {
     busy = true
     // Return to the first slide so the image that lands back on the card matches it.
     showSlide(0)
-    gsap.to(dialog.querySelectorAll('[data-detail-info] > *'), { autoAlpha: 0, duration: 0.25 })
+    gsap.to(dialog.querySelectorAll('[data-detail-info] > *, .detail__caption'), { autoAlpha: 0, duration: 0.5, ease: 'sine.inOut' })
     dialog.classList.add('is-closing')
     const state = Flip.getState(media)
-    gsap.delayedCall(0.2, () => {
+    gsap.delayedCall(0.45, () => {
       dialog.close()
       gsap.set(cardMedia, { autoAlpha: 1 })
       Flip.from(state, {
         targets: cardMedia,
-        duration: 0.8,
+        duration: 1.3,
         ease: 'expo.inOut',
         scale: true,
         zIndex: 50,
